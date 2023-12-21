@@ -72,20 +72,31 @@ async function copy() {
 
 .added {
   font-weight: 600;
-  background: rgb(171, 242, 188);
-  border: 1px solid rgb(71, 142, 88);
+  background: rgb(71, 142, 88);
+  border: 1px solid rgb(171, 242, 188);
   white-space: pre-wrap;
-
 }
 
 .removed {
   font-weight: 600;
-  background: rgb(242, 171, 171);
-  border: 1px solid rgb(142, 71, 71);
+  background: rgb(142, 71, 71);
+  border: 1px solid rgb(242, 171, 171);
   white-space: pre-wrap;
 }
 
 .icon {
   transform: translateY(4px);
+}
+
+@media (prefers-color-scheme: light) {
+  .added {
+    background: rgb(171, 242, 188);
+    border: 1px solid rgb(71, 142, 88);
+  }
+
+  .removed {
+    background: rgb(242, 171, 171);
+    border: 1px solid rgb(142, 71, 71);
+  }
 }
 </style>
