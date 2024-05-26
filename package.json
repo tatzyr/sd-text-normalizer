@@ -11,13 +11,13 @@
   "dependencies": {
     "@phosphor-icons/vue": "^2.2.1",
     "diff-match-patch": "^1.0.5",
-    "vue": "^3.4.25"
+    "vue": "^3.4.27"
   },
   "devDependencies": {
     "@types/diff-match-patch": "^1.0.36",
     "@vitejs/plugin-vue": "^5.0.4",
     "typescript": "^5.4.5",
-    "vite": "^5.2.10",
-    "vue-tsc": "^2.0.14"
+    "vite": "^5.2.11",
+    "vue-tsc": "^2.0.19"
   }
 }
