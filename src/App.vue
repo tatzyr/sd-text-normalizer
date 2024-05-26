@@ -6,7 +6,7 @@ import { PhCopy, PhCheckCircle } from "@phosphor-icons/vue";
 const dmp = new DiffMatchPatch();
 
 const text = ref('(masterpiece), 1girl,solo, blue hair,, long hair,pink eyes,hat, from above, hat, holding flowers, , beach,');
-const copied = ref(false);
+const isCopied = ref(false);
 
 const normalizedText = computed(() =>
   text
@@ -32,9 +32,9 @@ async function copy() {
     window.alert("ERROR: Could not copy text to clipboard");
     return;
   }
-  copied.value = true;
+  isCopied.value = true;
   await new Promise(s => setTimeout(s, 2000));
-  copied.value = false;
+  isCopied.value = false;
 }
 </script>
 
@@ -57,8 +57,8 @@ async function copy() {
     
     <div class="card">
       <button class="unko" type="button" @click="copy">
-        <ph-check-circle v-if="copied" color="rgb(71, 142, 88)" :size="20" class="icon" />
-        <ph-copy v-if="!copied" :size="20" class="icon" />
+        <ph-check-circle v-if="isCopied" color="rgb(71, 142, 88)" :size="20" class="icon" />
+        <ph-copy v-if="!isCopied" :size="20" class="icon" />
         Copy (without the <span class="removed">red words</span>)
       </button>
     </div>
