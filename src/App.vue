@@ -56,7 +56,7 @@ async function copy() {
     </div>
     
     <div class="card">
-      <button class="unko" type="button" @click="copy">
+      <button type="button" @click="copy">
         <ph-check-circle v-if="isCopied" color="rgb(71, 142, 88)" :size="20" class="icon" />
         <ph-copy v-if="!isCopied" :size="20" class="icon" />
         Copy (without the <span class="removed">red words</span>)
