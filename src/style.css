@@ -54,6 +54,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+label {
+  cursor: pointer;
+}
+
+label:hover input[type="checkbox"] {
+  box-shadow: #646cff 0 0 0 1px;
+}
+
+input[type="checkbox"] {
+  transition: box-shadow 0.25s;
+}
+
 .card {
   padding: 2em;
 }

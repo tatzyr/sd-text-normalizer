@@ -7,6 +7,7 @@ const dmp = new DiffMatchPatch();
 
 const text = ref('(masterpiece), 1girl,solo, blue hair,, long hair,pink eyes,hat, from above, hat, holding flowers, , beach,');
 const isCopied = ref(false);
+const isPromptSr = ref(false);
 
 const normalizedText = computed(() =>
   text
@@ -15,7 +16,7 @@ const normalizedText = computed(() =>
     .map(item => item.trim())
     .filter(Boolean)
     .filter((item, index, self) => self.indexOf(item) === index)
-    .join(", ")
+    .join(isPromptSr.value ? "," : ", ")
 );
 
 const changeObjects = computed(() => {
@@ -45,8 +46,15 @@ async function copy() {
     <p>Normalize the Stable Diffusion (a1111) prompt.<br>Put a space after the comma and remove duplicate words.</p>
     <p>The text is not transmitted or stored externally.</p>
 
-    <textarea class="text-input" cols="60" rows="8" v-model="text"></textarea>
-
+    <div class="card">
+      <textarea class="text-input" cols="60" rows="8" v-model="text"></textarea>
+      <br>
+      <label>
+        <input type="checkbox" v-model="isPromptSr">
+        Prompt S/R format
+      </label>
+    </div>
+    
     <div class="card">
       <div class="result">
         <span v-for="(changeObject, i) of changeObjects" :key="`${i}-${changeObject[1]}`" :class="{ added: changeObject[0] === 1, removed: changeObject[0] === -1 }">
@@ -54,7 +62,7 @@ async function copy() {
         </span>
       </div>
     </div>
-    
+
     <div class="card">
       <button type="button" @click="copy">
         <ph-check-circle v-if="isCopied" color="rgb(71, 142, 88)" :size="20" class="icon" />
