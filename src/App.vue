@@ -9,15 +9,20 @@ const text = ref('(masterpiece), 1girl,solo, blue hair,, long hair,pink eyes,hat
 const isCopied = ref(false);
 const isPromptSr = ref(false);
 
-const normalizedText = computed(() =>
-  text
-    .value
-    .split(",")
-    .map(item => item.trim())
-    .filter(Boolean)
-    .filter((item, index, self) => self.indexOf(item) === index)
-    .join(isPromptSr.value ? "," : ", ")
-);
+const normalizedText = computed(() => {
+  const lines = text.value.split("\n");
+
+  const normalizedLines = lines.map(line =>
+    line
+      .split(",")
+      .map(item => item.trim())
+      .filter(Boolean)
+      .filter((item, index, self) => self.indexOf(item) === index)
+      .join(isPromptSr.value ? "," : ", ")
+  );
+
+  return normalizedLines.join(",\n").replaceAll(/^,$/mg, "");
+});
 
 const changeObjects = computed(() => {
   const d = dmp.diff_main(text.value, normalizedText.value);
@@ -76,6 +81,10 @@ async function copy() {
 <style scoped>
 .text-input, .result {
   font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+}
+
+.result {
+  white-space: pre-wrap;
 }
 
 .added {
