@@ -12,12 +12,20 @@ const isPromptSr = ref(false);
 const normalizedText = computed(() => {
   const lines = text.value.split("\n");
 
+  const seenWords = new Set<string>();
+
   const normalizedLines = lines.map(line =>
     line
       .split(",")
       .map(item => item.trim())
       .filter(Boolean)
-      .filter((item, index, self) => self.indexOf(item) === index)
+      .filter(item => {
+        if (seenWords.has(item)) {
+          return false;
+        }
+        seenWords.add(item);
+        return true;
+      })
       .join(isPromptSr.value ? "," : ", ")
   );
 
